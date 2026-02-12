@@ -1,18 +1,12 @@
 ﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
 // Общие сведения об этой сборке предоставляются следующим набором
 // набор атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("DualListSerialization")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DualListSerialization")]
-[assembly: AssemblyCopyright("Copyright ©  2026")]
+[assembly: AssemblyTitle("Тестовое задание Saber")]
+[assembly: AssemblyProduct("Тестовое задание Saber")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
