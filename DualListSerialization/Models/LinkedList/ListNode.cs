@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections;
+using System.Xml.Linq;
 
 namespace DualListSerialization.Models
 {
@@ -12,6 +13,13 @@ namespace DualListSerialization.Models
         public ListNode Next;
         public ListNode Random; 
         public string Data;
+        public ListNode()
+        {
+            
+        }
+        public ListNode(string data) {
+            this.Data = data;
+        }
     }
 
 
@@ -19,6 +27,7 @@ namespace DualListSerialization.Models
     {
         public ListNode Head;
         public ListNode Tail;
+        public ListNode Current;
         public int Count;
         #region Enumeration
         IEnumerator IEnumerable.GetEnumerator()
@@ -122,7 +131,52 @@ namespace DualListSerialization.Models
             }
             return null;
         }
-#endregion
+        #endregion
+
+
+
+        public void Add(string data)
+        {
+            ListNode newNode = new ListNode(data);
+
+            if (Head == null)
+            {
+                Head = Tail = newNode;
+            }
+            else
+            {
+                Tail.Next = newNode;
+                newNode.Previous = Tail;
+                Tail = newNode;
+            }
+        }
+
+        public void MoveToHead()
+        {
+            Current = Head;
+        }
+
+        public void MoveToTail()
+        {
+            Current = Tail;
+        }
+
+        public void MoveNext()
+        {
+            if (Current?.Next != null)
+                Current = Current.Next;
+        }
+
+        public void MovePrevious()
+        {
+            if (Current?.Previous != null)
+                Current = Current.Previous;
+        }
+
+        public void Clear()
+        {
+            Head = Tail = Current = null;
+        }
     }
 
 }

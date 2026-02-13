@@ -6,7 +6,73 @@
         xmlns:local="clr-namespace:DualListSerialization"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top" Height="33" RenderTransformOrigin="-0.388,0.711">
+            <Button Content="Settings"
+                    Click="OpenSettings_Click"
+                    Width="90"/>
+
+            <Separator/>
+
+            <Button Content="Exit"
+                    Click="Exit_Click"
+                    Width="70"/>
+        </ToolBar>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="InputTextBox"
+                     Grid.Row="0"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,10">
+                <Button Content="Deserialize File"
+                        Width="120"
+                        Margin="0,0,10,0"
+                        Click="Deserialize_Click"/>
+
+                <Button Content="Serialize"
+                        Width="120"
+                        Click="Serialize_Click"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <TextBlock FontSize="16"
+                           FontWeight="Bold"
+                           Text="Current element: "/>
+
+                <TextBlock x:Name="CurrentElementText"
+                           FontSize="16"
+                           FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,20,0,0">
+                <Button Content="Head element"
+                        Width="90"
+                        Margin="0,0,5,0"
+                        Click="GoToStart_Click"/>
+
+                <Button Content="Go back"
+                        Width="90"
+                        Margin="0,0,5,0"
+                        Click="Previous_Click"/>
+
+                <Button Content="Go next"
+                        Width="90"
+                        Margin="0,0,5,0"
+                        Click="Next_Click"/>
+
+                <Button Content="Tail element"
+                        Width="90"
+                        Click="GoToEnd_Click"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </Window>
