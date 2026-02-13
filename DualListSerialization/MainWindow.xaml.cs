@@ -77,6 +77,11 @@ namespace DualListSerialization
             _currentList.MoveNext();
             UpdateCurrentElement();
         }
+        private void Random_Click(object sender, RoutedEventArgs e)
+        {
+            _currentList.MoveRandom();
+            UpdateCurrentElement();
+        }
 
         private void Previous_Click(object sender, RoutedEventArgs e)
         {

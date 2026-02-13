@@ -39,6 +39,7 @@ namespace DualListSerialization.Models
             var current = Head;
             while (current != null)
             {
+                
                 yield return current;
                 current = current.Next;
             }
@@ -52,7 +53,7 @@ namespace DualListSerialization.Models
 
             foreach (var nodeTuple in this.Select((node, id) => (node, id)))
             {
-                nodeToRandomPointerDictionary.Add(nodeTuple.node, nodeTuple.id);
+                nodeToRandomPointerDictionary.Add(nodeTuple.node, nodeTuple.id + 1);
             }
 
             using (StreamWriter writer = new StreamWriter(stream))
@@ -80,7 +81,7 @@ namespace DualListSerialization.Models
                     if (delimeterIndex != -1)
                     {
                         var data = rawData.Substring(0, delimeterIndex);
-                        int.TryParse(rawData.Substring(delimeterIndex + 1, rawData.Length - 1), out var randomId);
+                        int.TryParse(rawData.Substring(delimeterIndex + 1,  rawData.Length - delimeterIndex-1), out var randomId);
                         if (faultyNodes.Count > 0)
                         {
                             if (randomId >= faultyNodes.Min())
@@ -88,7 +89,8 @@ namespace DualListSerialization.Models
                                 randomId -= faultyNodes.Where(x => x <= randomId).Count();
                             }
                         }
-                        dataEntries.Add(new Tuple<string, int>(data, randomId));
+                        dataEntries.Add(new Tuple<string, int>(data, randomId - 1));
+                        counter++;
                     }
                     else
                     {
@@ -114,13 +116,15 @@ namespace DualListSerialization.Models
                 else
                 {
                     Tail = current;
+                    current.Next = null;
                 }
             }
 
-            foreach (var nodeTuple in this.Select((node, index) => (node, index)))
+            foreach (var nodeTuple in this.Select((node, index) => (node, index )))
             {
                 nodeTuple.node.Random = GetRandomNode(dataEntries.ElementAt(nodeTuple.index).Item2);
             }
+            Tail.Next = null; 
         }
         private ListNode GetRandomNode(int pointerIndex)
         {
@@ -165,6 +169,11 @@ namespace DualListSerialization.Models
         {
             if (Current?.Next != null)
                 Current = Current.Next;
+        }
+        public void MoveRandom()
+        {
+            if (Current?.Random != null)
+                Current = Current.Random;
         }
 
         public void MovePrevious()
